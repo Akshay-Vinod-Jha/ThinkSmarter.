@@ -1,14 +1,13 @@
 .overlay {
   background-color: rgba(0, 0, 0, 0.75);
-  /* background-color: pink; */
   display: grid;
   place-content: center;
   z-index: 100000;
   position: fixed;
-  inset: 0;
+  top: 0;
   overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh !important;
+  min-width: 100vw !important;
 }
 .model {
   width: min(500px, 90vw);

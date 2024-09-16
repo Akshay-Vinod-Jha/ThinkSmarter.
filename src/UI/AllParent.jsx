@@ -1,6 +1,6 @@
 import React from "react";
 import ToolsBox from "./ToolsBox";
-
+import Reveal from "../UI/Reveal";
 function AllParent(props) {
   const arrayOfTools = [
     {
@@ -281,21 +281,23 @@ function AllParent(props) {
     <div className="w-[100%] rounded-xl md:grid-rows-6 grid-rows-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 place-content-center place-items-center gap-2 md:gap-3 lg:gap-10 p-1 md:p-2 lg:p-10 my-10">
       {arrayOfTools.map((value, index) => {
         return (
-          <ToolsBox
-            key={`value.name${index}`}
-            toolName={value.name}
-            slogan={value.slogan}
-            imageUrl={value.imageUrl}
-            style={{}}
-            onClick={() => {
-              props.updateState();
-              props.updateClicked({
-                ...arrayOfTools[index],
-                slogan: arrayOfTools[index].slogan2,
-                steps: arrayOfSteps[index],
-              });
-            }}
-          />
+          <Reveal>
+            <ToolsBox
+              key={`value.name${index}`}
+              toolName={value.name}
+              slogan={value.slogan}
+              imageUrl={value.imageUrl}
+              style={{}}
+              onClick={() => {
+                props.updateState();
+                props.updateClicked({
+                  ...arrayOfTools[index],
+                  slogan: arrayOfTools[index].slogan2,
+                  steps: arrayOfSteps[index],
+                });
+              }}
+            />
+          </Reveal>
         );
       })}
     </div>

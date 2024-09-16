@@ -15,11 +15,8 @@ import { useLocation } from "react-router-dom";
 import { readData } from "../../common-funtions/readData.jsx";
 import { updateData } from "../../common-funtions/updateData.jsx";
 import { MdCancel } from "react-icons/md";
-<<<<<<< HEAD
-=======
 import Copy from "../../UI/Copy.jsx";
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
-const Dictionary = () => {
+const Dictionary = (props) => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -112,7 +109,10 @@ const Dictionary = () => {
         <MdCancel
           className={cssClasses.cancel}
           fontSize={"2rem"}
-          onClick={() => setIsPopUp(false)}
+          onClick={() => {
+            setIsPopUp(false);
+            props.updateShowing(false);
+          }}
         />
         <p className={cssClasses.prompt}>
           <span className="text-[#fc0001]">Prompt: </span>
@@ -134,7 +134,9 @@ const Dictionary = () => {
   const [a, seta] = useState(true);
   return (
     <>
-      <div className="w-screen h-auto grid grid-cols-1 md:grid-cols-4 place-content-center place-items-start gap-2">
+      <div
+        className={`w-screen  ${props.showing ? "h-[100vh] overflow-hidden" : "h-auto"}  grid grid-cols-1 md:grid-cols-4 place-content-center place-items-start gap-2`}
+      >
         <div className="w-full col-span-1 md:col-span-3 h-auto p-2 md:p-4">
           <Title title="IntelliDict" setShowHistory={setShowHistory} />
           <PromptAreaForMail
@@ -202,24 +204,13 @@ const Dictionary = () => {
           showPopUp={setIsPopUp}
           popup={ispopup}
           isHistroyLoading={isHistroyLoading}
+          updateShowing={props.updateShowing}
         />
       </div>
-<<<<<<< HEAD
-      <History
-        height="95vh"
-        showHistory={showHistory}
-        setShowHistory={setShowHistory}
-        history={history}
-        popupHandler={popupHandler}
-        showPopUp={setIsPopUp}
-        popup={ispopup}
-        isHistroyLoading={isHistroyLoading}
-      />
-    </div>
-=======
-      <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      {!props.showing && (
+        <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      )}
     </>
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
   );
 };
 

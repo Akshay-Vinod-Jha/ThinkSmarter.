@@ -17,7 +17,7 @@ import { useLocation } from "react-router-dom";
 import { readData } from "../../common-funtions/readData.jsx";
 import { updateData } from "../../common-funtions/updateData.jsx";
 import { MdCancel } from "react-icons/md";
-function SpellChecker() {
+function SpellChecker(props) {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -53,7 +53,7 @@ function SpellChecker() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          key: "SZ8UPZQ1YFFHDJRL3BPERB2OZ7GANIPY", // replace with your API key
+          key: "8IQU8QPES9OOD105A3X5XXNCZIWC9P81", // replace with your API key
           session_id: "test session",
           text,
         }),
@@ -103,11 +103,7 @@ function SpellChecker() {
       console.log(userId);
       const data = await readData(userId);
       console.log(data);
-<<<<<<< HEAD
-      // setHistory(data["SpellChecker"] ? data["SpellChecker"] : []);
-=======
       setHistory(data["SpellChecker"] ? data["SpellChecker"] : []);
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
       setIsHistoryLoading(false);
     };
     setIsHistoryLoading(true);
@@ -121,7 +117,10 @@ function SpellChecker() {
         <MdCancel
           className={cssClasses.cancel}
           fontSize={"2rem"}
-          onClick={() => setIsPopUp(false)}
+          onClick={() => {
+            setIsPopUp(false);
+            props.updateShowing(false);
+          }}
         />
         <p className={cssClasses.prompt}>
           {" "}
@@ -198,7 +197,7 @@ function SpellChecker() {
   return (
     <>
       <div
-        className={`w-screen ${a ? "h-[100vh]" : "h-auto"} grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 place-content-center place-items-start pt-2`}
+        className={`w-screen ${props.showing ? "h-[100vh] overflow-hidden" : "h-auto"} grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 place-content-center place-items-start pt-2`}
       >
         <div className="w-full col-span-1 md:col-span-3 lg:col-span-3 p-2 mt-4 grid grid-cols-1 place-content-center place-items-center">
           <div className="w-full flex justify-between items-center mb-2 mt-4 text-white">
@@ -292,24 +291,13 @@ function SpellChecker() {
           showPopUp={setIsPopUp}
           popup={ispopup}
           isHistroyLoading={isHistroyLoading}
+          updateShowing={props.updateShowing}
         />
       </div>
-<<<<<<< HEAD
-      <History
-        height="95vh"
-        showHistory={showHistory}
-        setShowHistory={setShowHistory}
-        history={history}
-        popupHandler={popupHandler}
-        showPopUp={setIsPopUp}
-        popup={ispopup}
-        isHistroyLoading={isHistroyLoading}
-      />
-    </div>
-=======
-      <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      {!props.showing && (
+        <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      )}{" "}
     </>
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
   );
 }
 

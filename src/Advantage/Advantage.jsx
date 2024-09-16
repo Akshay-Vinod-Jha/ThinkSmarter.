@@ -13,11 +13,11 @@ function Advantage(props) {
   }, []);
   return (
     <div className="w-full flex flex-col justify-center items-center p-6 md:p-6 font-lexend">
-      <div className="w-40 md:w-50 lg:w-60 aspect-square overflow-hidden rounded-xl outline outline-1 outline-offset-8 outline-white">
+      <div className="w-40 md:w-50 hover:scale-110 duration-150 lg:w-60 aspect-square overflow-hidden rounded-xl">
         <img
           src={props.information.imageUrl}
           alt=""
-          className="w-40 md:w-50 hover:scale-110 duration-150 lg:w-60 aspect-square object-cover rounded-xl "
+          className="w-40 md:w-50  lg:w-60 aspect-square object-cover rounded-xl "
         />
       </div>
       <h1 className="tracking-widest font-normal text-white mt-4 uppercase text-base md:text-lg lg:text-xl xl:text-xl border-b-2 border-[#728894]">

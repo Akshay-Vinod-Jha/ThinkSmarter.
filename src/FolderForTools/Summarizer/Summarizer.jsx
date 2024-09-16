@@ -20,7 +20,7 @@ import { updateData } from "../../common-funtions/updateData.jsx";
 import classes from "./Summarizer.module.css";
 import { MdCancel } from "react-icons/md";
 import { readData } from "../../common-funtions/readData.jsx";
-const Summarizer = () => {
+const Summarizer = (props) => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -80,7 +80,7 @@ const Summarizer = () => {
   async function getSummarizeddViaText(data, length) {
     try {
       const response = await inference.summarization({
-        model: "facebook/bart-large-cnn",
+        model: "Falconsai/text_summarization",
         inputs: data + "",
         parameters: {
           min_length: length,
@@ -152,7 +152,10 @@ const Summarizer = () => {
         <MdCancel
           className={classes.cancel}
           fontSize={"2rem"}
-          onClick={() => setIsPopUP(false)}
+          onClick={() => {
+            setIsPopUP(false);
+            props.updateShowing(false);
+          }}
         />
         <div className={classes.promptContainer}>
           <div className={classes.heading}>
@@ -190,7 +193,7 @@ const Summarizer = () => {
   return (
     <React.Fragment>
       <div
-        className={`w-screen ${a ? "h-[100vh]" : "h-auto"} grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 place-content-center place-items-start pt-2`}
+        className={`w-screen ${props.showing ? "h-[100vh] overflow-hidden" : "h-auto"} grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 place-content-center place-items-start pt-2`}
       >
         <div
           ref={divRef}
@@ -367,9 +370,12 @@ const Summarizer = () => {
           setShowHistory={setShowHistory}
           history={history}
           popupHandler={popupHandler}
+          updateShowing={props.updateShowing}
         />
       </div>
-      <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      {!props.showing && (
+        <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      )}
     </React.Fragment>
   );
 };

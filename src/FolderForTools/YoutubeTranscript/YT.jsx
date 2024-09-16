@@ -16,7 +16,7 @@ import { readData } from "../../common-funtions/readData.jsx";
 import { MdCancel } from "react-icons/md";
 import classes from "./YT.module.css";
 import Copy from "../../UI/Copy.jsx";
-const YT = () => {
+const YT = (props) => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -113,7 +113,10 @@ const YT = () => {
         <MdCancel
           className={classes.cancel}
           fontSize={"2rem"}
-          onClick={() => setIsPopUP(false)}
+          onClick={() => {
+            setIsPopUP(false);
+            props.updateShowing(false);
+          }}
         />
         <div className={classes.inputContainer}>
           <p className={classes.prompt}>
@@ -135,8 +138,10 @@ const YT = () => {
 
   return (
     <>
-      <div className="w-screen h-auto grid pb-10 grid-cols-1 md:grid-cols-4 place-content-center place-items-start gap-2">
-        <div className="w-full col-span-1 md:col-span-3 h-auto p-2 md:p-4">
+      <div
+        className={`w-screen ${props.showing ? "h-[100vh] overflow-hidden" : "h-auto"} grid pb-10 grid-cols-1 md:grid-cols-4 place-content-center place-items-start gap-2`}
+      >
+        <div className={`w-full col-span-1 md:col-span-3 h-auto p-2 md:p-4`}>
           <Title title="AI Transcript Tube" setShowHistory={setShowHistory} />
           <PromptAreaForMail
             placeholder="Enter The Video Id here.."
@@ -207,9 +212,12 @@ const YT = () => {
           setShowHistory={setShowHistory}
           history={history}
           popupHandler={popupHandler}
+          updateShowing={props.updateShowing}
         />
       </div>
-      <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      {!props.showing && (
+        <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      )}
     </>
   );
 };

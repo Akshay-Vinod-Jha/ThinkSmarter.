@@ -21,11 +21,13 @@ import { Route, Routes } from "react-router-dom";
 import Translation from "./FolderForTools/Translation/Translation";
 // import TextExtraction from "./FolderForTools/TextExtraction/TextExtraction";
 import { auth } from "../firebase.config";
+import { useState } from "react";
 const App = () => {
   console.log(auth);
+  const [showing, updateShowing] = useState(false);
   const showPop = useSelector(getPopUpState);
   return (
-    <div>
+    <div className="w-screen h-auto overflow-x-hidden no-scrollbar">
       {showPop.visible &&
         createPortal(
           <PopUp content={showPop.style} />,
@@ -38,18 +40,73 @@ const App = () => {
           <Route path="SignIn" element={<SignIN />} />
           <Route path="AllToolsMainPage">
             <Route index element={<AllToolsMainPage />} />
-            <Route path="VISUALIZEAI" element={<TextToImage />} />
-            <Route path="VISIONVERBALIZER" element={<VisionVerbalizer />} />
-            <Route path="AITRANSCRIBETUBE" element={<YT />} />
-            <Route path="AIBRIEFBUDDY" element={<Summarizer />} />
-            <Route path="INQUIRYRESPONSE" element={<QA />} />
-            <Route path="SPELLCHECKER" element={<SpellChecker />} />
-            <Route path="CODECRAFT" element={<TTC />} />
-            <Route path="CHATBOT" element={<Chatbot />} />
-            <Route path="INTELLIDICT" element={<Dictionary />} />
-            <Route path="TRANSLATEXPERT" element={<Translation />} />
+            <Route
+              path="VISUALIZEAI"
+              element={
+                <TextToImage showing={showing} updateShowing={updateShowing} />
+              }
+            />
+            <Route
+              path="VISIONVERBALIZER"
+              element={
+                <VisionVerbalizer
+                  showing={showing}
+                  updateShowing={updateShowing}
+                />
+              }
+            />
+            <Route
+              path="AITRANSCRIBETUBE"
+              element={<YT showing={showing} updateShowing={updateShowing} />}
+            />
+            <Route
+              path="AIBRIEFBUDDY"
+              element={
+                <Summarizer showing={showing} updateShowing={updateShowing} />
+              }
+            />
+            <Route
+              path="INQUIRYRESPONSE"
+              element={<QA showing={showing} updateShowing={updateShowing} />}
+            />
+            <Route
+              path="SPELLCHECKER"
+              element={
+                <SpellChecker showing={showing} updateShowing={updateShowing} />
+              }
+            />
+            <Route
+              path="CODECRAFT"
+              element={<TTC showing={showing} updateShowing={updateShowing} />}
+            />
+            <Route
+              path="CHATBOT"
+              element={
+                <Chatbot showing={showing} updateShowing={updateShowing} />
+              }
+            />
+            <Route
+              path="INTELLIDICT"
+              element={
+                <Dictionary showing={showing} updateShowing={updateShowing} />
+              }
+            />
+            <Route
+              path="TRANSLATEXPERT"
+              element={
+                <Translation showing={showing} updateShowing={updateShowing} />
+              }
+            />
             <Route path="VOICESYNC" element={<TTS />} />
-            <Route path="AIEXTRACTA" element={<TextExtraction />} />
+            <Route
+              path="AIEXTRACTA"
+              element={
+                <TextExtraction
+                  showing={showing}
+                  updateShowing={updateShowing}
+                />
+              }
+            />
           </Route>
         </Route>
       </Routes>

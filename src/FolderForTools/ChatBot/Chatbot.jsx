@@ -5,11 +5,7 @@ import Bottom from "../../UI/Bottom.jsx";
 import { HfInference } from "@huggingface/inference";
 import ChatingScreen from "./ChatingScreen";
 import { MdError } from "react-icons/md";
-<<<<<<< HEAD
 import cssClasses from "./Chatbot.module.css";
-=======
-import cssClasses from "./ChatBot.module.css";
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
 import { IoSend } from "react-icons/io5";
 import Title from "../Summarizer/RequiredComponents/Title";
 import { TbBulb } from "react-icons/tb";
@@ -21,7 +17,7 @@ import { updateData } from "../../common-funtions/updateData.jsx";
 import { MdCancel } from "react-icons/md";
 import { hidePopUp, showPopUp } from "../../store/popupSlice.jsx";
 import { all } from "axios";
-const Chatbot = () => {
+const Chatbot = (props) => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -141,7 +137,10 @@ const Chatbot = () => {
         <MdCancel
           className={cssClasses.cancel}
           fontSize={"2rem"}
-          onClick={() => setIsPopUp(false)}
+          onClick={() => {
+            setIsPopUp(false);
+            props.updateShowing(false);
+          }}
         />
         <div className="w-full p-2 flex flex-col gap-4">
           <h1 className="w-full md:w-[50%] rounded-xl self-end py-1 px-2  bg-[#fc0001] text-white">
@@ -175,7 +174,9 @@ const Chatbot = () => {
   };
   return (
     <>
-      <div className="rounded-lg w-screen p-1 md:p-2 lg:p-4 h-auto grid grid-cols-1 md:grid-cols-4 place-content-center place-items-start md:gap-2 lg:gap-3">
+      <div
+        className={`rounded-lg w-screen p-1 md:p-2 lg:p-4 ${props.showing ? "h-[100vh] overflow-hidden" : "h-auto"} grid grid-cols-1 md:grid-cols-4 place-content-center place-items-start md:gap-2 lg:gap-3`}
+      >
         <div className="col-span-1 md:col-span-3 w-full bg-[#1e1e1e] p-2 flex flex-col justify-center items-center gap-2">
           <Title title="ChatBot" setShowHistory={setShowHistory} />
           <ChatingScreen
@@ -230,25 +231,14 @@ const Chatbot = () => {
           popupHandler={popupHandler}
           showPopUp={setIsPopUp}
           popup={ispopup}
+          updateShowing={props.updateShowing}
           isHistroyLoading={isHistroyLoading}
         />
       </div>
-<<<<<<< HEAD
-      <History
-        height="95vh"
-        showHistory={showHistory}
-        setShowHistory={setShowHistory}
-        history={history}
-        popupHandler={popupHandler}
-        showPopUp={setIsPopUp}
-        popup={ispopup}
-        isHistroyLoading={isHistroyLoading}
-      />
-    </div>
-=======
-      <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      {!props.showing && (
+        <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      )}{" "}
     </>
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
   );
 };
 

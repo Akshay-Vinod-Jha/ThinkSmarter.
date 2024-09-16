@@ -22,7 +22,7 @@ let pdfjsLib = window["pdfjs-dist/build/pdf"];
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js";
 
-const TextExtraction = () => {
+const TextExtraction = (props) => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -124,7 +124,10 @@ const TextExtraction = () => {
         <MdCancel
           className={classes.cancel}
           fontSize={"2rem"}
-          onClick={() => setIsPopUp(false)}
+          onClick={() => {
+            setIsPopUp(false);
+            props.updateShowing(false);
+          }}
         />
         <div>
           <p className={classes.heading}>Input</p>
@@ -152,7 +155,12 @@ const TextExtraction = () => {
     fetchHistory();
   }, []);
   return (
-    <div className={classes.VisionVerbalizer}>
+    <div
+      className={
+        classes.VisionVerbalizer +
+        ` ${props.showing ? "h-[100vh] overflow-hidden" : "h-auto"}`
+      }
+    >
       <div className={classes.upper}>
         <MainBox
           src={src}
@@ -160,16 +168,7 @@ const TextExtraction = () => {
           setShowHistory={setShowHistory}
           getImageHandler={getImageHandler}
         />
-<<<<<<< HEAD
-        {/* <History
-          height="650px"
-          showHistory={showHistory}
-          setShowHistory={setShowHistory}
-          history={Array(5).fill(
-            "The Generated text History from the uploaded image is displayed here."
-          )}
-        /> */}
-=======
+
         <History
           height="95vh"
           showHistory={showHistory}
@@ -179,14 +178,16 @@ const TextExtraction = () => {
           showPopUp={setIsPopUp}
           popup={ispopup}
           isHistroyLoading={isHistroyLoading}
+          updateShowing={props.updateShowing}
         />
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
       </div>
       <Output isLoading={isLoading}>{generatedText}</Output>
       <div className={classes.lower}>
         <TryThese getImageHandler={getImageHandler} />
       </div>
-      <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      {!props.showing && (
+        <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      )}{" "}
     </div>
   );
 };

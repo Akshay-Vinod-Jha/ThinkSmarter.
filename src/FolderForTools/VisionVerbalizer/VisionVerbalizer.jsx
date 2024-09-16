@@ -17,7 +17,7 @@ import { MdCancel } from "react-icons/md";
 import Copy from "../../UI/Copy";
 import { useLocation } from "react-router-dom";
 
-const VisionVerbalizer = () => {
+const VisionVerbalizer = (props) => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -113,7 +113,10 @@ const VisionVerbalizer = () => {
         <MdCancel
           className={classes.cancel}
           fontSize={"2rem"}
-          onClick={() => setIsPopUp(false)}
+          onClick={() => {
+            setIsPopUp(false);
+            props.updateShowing(false);
+          }}
         />
         <div className={classes.imgContainer}>
           <p className={classes.inputs} style={{ color: "#fc1001" }}>
@@ -132,7 +135,12 @@ const VisionVerbalizer = () => {
   };
 
   return (
-    <div className={classes.VisionVerbalizer}>
+    <div
+      className={
+        classes.VisionVerbalizer +
+        `   ${props.showing ? "h-[100vh] overflow-hidden" : "h-auto"}  `
+      }
+    >
       <div className={classes.upper}>
         <MainBox src={src} updateSrc={setSrc} setShowHistory={setShowHistory} />
         <History
@@ -144,13 +152,16 @@ const VisionVerbalizer = () => {
           setShowHistory={setShowHistory}
           history={history}
           popupHandler={popupHandler}
+          updateShowing={props.updateShowing}
         />
       </div>
       <Output isLoading={isLoading}>{generatedText}</Output>
       <div className={classes.lower}>
         <TryThese updateSrc={setSrc} />
       </div>
-      <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      {!props.showing && (
+        <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      )}
     </div>
   );
 };

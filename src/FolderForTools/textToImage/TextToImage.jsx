@@ -27,7 +27,7 @@ import { auth } from "../../../firebase.config.js";
 import Bottom from "../../UI/Bottom.jsx";
 const HF_TOKEN = "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";
 
-function TextToImage() {
+function TextToImage(props) {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -109,7 +109,10 @@ function TextToImage() {
         <MdCancel
           className={cssClasses.cancel}
           fontSize={"2rem"}
-          onClick={() => setIsPopUp(false)}
+          onClick={() => {
+            setIsPopUp(false);
+            props.updateShowing(false);
+          }}
         />
         <div className={cssClasses.prompt}>
           <span style={{ color: "#fc1001" }}>Prompt: </span>
@@ -141,6 +144,7 @@ function TextToImage() {
   ) : (
     <CiImageOn
       color="rgba(255,255,255,.5)"
+      o
       fontSize="clamp(20rem,25vw,30rem)"
     />
   );
@@ -150,12 +154,13 @@ function TextToImage() {
     <div
       className={
         cssClasses.textToImageContainer +
-        "  w-[99vw] lg:h-[auto] min-h-screen bg-[#1E1E1E] grid grid-cols-1  gap-2 p-1 md:p-2 lg:p-3 xl:p-2"
+        `  w-[99vw]  ${props.showing ? " h-[100vh] " : " min-h-screen lg:h-[auto] "}  bg-[#1E1E1E] grid grid-cols-1  gap-2 p-1 md:p-2 lg:p-3 xl:p-2`
       }
     >
       {/* firstChild */}
-
-      <div className="bg-black h-[auto] row-span-2  md:row-span-2 lg:row-span-3 rounded-xl grid grid-cols-4 gap-2 p-2">
+      <div
+        className={`bg-black ${props.showing ? "h-[90vh]" : "h-auto"} row-span-2  md:row-span-2 lg:row-span-3 rounded-xl grid grid-cols-4 gap-2 p-2`}
+      >
         {/* 1c */}
         <div className="col-span-4 md:col-span-3 p-1 lg:col-span-3  rounded-xl grid grid-cols-1">
           <div className="bg-transparent rounded-xl flex flex-col gap-2 justify-between items-center text-base text-[#728894]">
@@ -228,18 +233,23 @@ function TextToImage() {
           showPopUp={setIsPopUp}
           popup={ispopup}
           isHistroyLoading={isHistroyLoading}
+          updateShowing={props.updateShowing}
         />
       </div>
-      <div className="bg-black rounded-xl h-[fit-content]">
-        <TryThese />
-        <MainBox
-          setPrompt={(prompt) => {
-            promptInputRef.current.value = prompt;
-            get(prompt);
-          }}
-        />
-      </div>
-      <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      {!props.showing && (
+        <div className="bg-black rounded-xl h-[fit-content]">
+          <TryThese />
+          <MainBox
+            setPrompt={(prompt) => {
+              promptInputRef.current.value = prompt;
+              get(prompt);
+            }}
+          />
+        </div>
+      )}
+      {!props.showing && (
+        <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      )}{" "}
     </div>
   );
 }

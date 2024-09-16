@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import History from "../../UI/History";
-<<<<<<< HEAD
-=======
 import Bottom from "../../UI/Bottom.jsx";
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
 import Copy from "../../UI/Copy";
 import Title from "../Summarizer/RequiredComponents/Title";
 import BigTextarea from "./BigTextarea";
@@ -20,9 +17,6 @@ import { useLocation } from "react-router-dom";
 import { readData } from "../../common-funtions/readData.jsx";
 import { updateData } from "../../common-funtions/updateData.jsx";
 import { MdCancel } from "react-icons/md";
-<<<<<<< HEAD
-
-=======
 const languages = [
   {
     language: "af",
@@ -569,7 +563,6 @@ const languages = [
     name: "Chinese (Simplified)",
   },
 ];
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
 const Translation = (props) => {
   useEffect(() => {
     window.scroll(0, 0);
@@ -582,556 +575,7 @@ const Translation = (props) => {
   const [ispopup, setIsPopUp] = useState(false);
   const [isHistroyLoading, setIsHistoryLoading] = useState(false);
   const [history, setHistory] = useState([]);
-<<<<<<< HEAD
-  const [languagecode, setLanguageCode] = useState([
-    {
-      language: "af",
-      name: "Afrikaans",
-    },
-    {
-      language: "sq",
-      name: "Albanian",
-    },
-    {
-      language: "am",
-      name: "Amharic",
-    },
-    {
-      language: "ar",
-      name: "Arabic",
-    },
-    {
-      language: "hy",
-      name: "Armenian",
-    },
-    {
-      language: "as",
-      name: "Assamese",
-    },
-    {
-      language: "ay",
-      name: "Aymara",
-    },
-    {
-      language: "az",
-      name: "Azerbaijani",
-    },
-    {
-      language: "bm",
-      name: "Bambara",
-    },
-    {
-      language: "eu",
-      name: "Basque",
-    },
-    {
-      language: "be",
-      name: "Belarusian",
-    },
-    {
-      language: "bn",
-      name: "Bengali",
-    },
-    {
-      language: "bho",
-      name: "Bhojpuri",
-    },
-    {
-      language: "bs",
-      name: "Bosnian",
-    },
-    {
-      language: "bg",
-      name: "Bulgarian",
-    },
-    {
-      language: "ca",
-      name: "Catalan",
-    },
-    {
-      language: "ceb",
-      name: "Cebuano",
-    },
-    {
-      language: "ny",
-      name: "Chichewa",
-    },
-    {
-      language: "zh",
-      name: "Chinese (Simplified)",
-    },
-    {
-      language: "zh-TW",
-      name: "Chinese (Traditional)",
-    },
-    {
-      language: "co",
-      name: "Corsican",
-    },
-    {
-      language: "hr",
-      name: "Croatian",
-    },
-    {
-      language: "cs",
-      name: "Czech",
-    },
-    {
-      language: "da",
-      name: "Danish",
-    },
-    {
-      language: "dv",
-      name: "Divehi",
-    },
-    {
-      language: "doi",
-      name: "Dogri",
-    },
-    {
-      language: "nl",
-      name: "Dutch",
-    },
-    {
-      language: "en",
-      name: "English",
-    },
-    {
-      language: "eo",
-      name: "Esperanto",
-    },
-    {
-      language: "et",
-      name: "Estonian",
-    },
-    {
-      language: "ee",
-      name: "Ewe",
-    },
-    {
-      language: "tl",
-      name: "Filipino",
-    },
-    {
-      language: "fi",
-      name: "Finnish",
-    },
-    {
-      language: "fr",
-      name: "French",
-    },
-    {
-      language: "fy",
-      name: "Frisian",
-    },
-    {
-      language: "gl",
-      name: "Galician",
-    },
-    {
-      language: "lg",
-      name: "Ganda",
-    },
-    {
-      language: "ka",
-      name: "Georgian",
-    },
-    {
-      language: "de",
-      name: "German",
-    },
-    {
-      language: "el",
-      name: "Greek",
-    },
-    {
-      language: "gn",
-      name: "Guarani",
-    },
-    {
-      language: "gu",
-      name: "Gujarati",
-    },
-    {
-      language: "ht",
-      name: "Haitian Creole",
-    },
-    {
-      language: "ha",
-      name: "Hausa",
-    },
-    {
-      language: "haw",
-      name: "Hawaiian",
-    },
-    {
-      language: "iw",
-      name: "Hebrew",
-    },
-    {
-      language: "hi",
-      name: "Hindi",
-    },
-    {
-      language: "hmn",
-      name: "Hmong",
-    },
-    {
-      language: "hu",
-      name: "Hungarian",
-    },
-    {
-      language: "is",
-      name: "Icelandic",
-    },
-    {
-      language: "ig",
-      name: "Igbo",
-    },
-    {
-      language: "ilo",
-      name: "Iloko",
-    },
-    {
-      language: "id",
-      name: "Indonesian",
-    },
-    {
-      language: "ga",
-      name: "Irish Gaelic",
-    },
-    {
-      language: "it",
-      name: "Italian",
-    },
-    {
-      language: "ja",
-      name: "Japanese",
-    },
-    {
-      language: "jw",
-      name: "Javanese",
-    },
-    {
-      language: "kn",
-      name: "Kannada",
-    },
-    {
-      language: "kk",
-      name: "Kazakh",
-    },
-    {
-      language: "km",
-      name: "Khmer",
-    },
-    {
-      language: "rw",
-      name: "Kinyarwanda",
-    },
-    {
-      language: "gom",
-      name: "Konkani",
-    },
-    {
-      language: "ko",
-      name: "Korean",
-    },
-    {
-      language: "kri",
-      name: "Krio",
-    },
-    {
-      language: "ku",
-      name: "Kurdish (Kurmanji)",
-    },
-    {
-      language: "ckb",
-      name: "Kurdish (Sorani)",
-    },
-    {
-      language: "ky",
-      name: "Kyrgyz",
-    },
-    {
-      language: "lo",
-      name: "Lao",
-    },
-    {
-      language: "la",
-      name: "Latin",
-    },
-    {
-      language: "lv",
-      name: "Latvian",
-    },
-    {
-      language: "ln",
-      name: "Lingala",
-    },
-    {
-      language: "lt",
-      name: "Lithuanian",
-    },
-    {
-      language: "lb",
-      name: "Luxembourgish",
-    },
-    {
-      language: "mk",
-      name: "Macedonian",
-    },
-    {
-      language: "mai",
-      name: "Maithili",
-    },
-    {
-      language: "mg",
-      name: "Malagasy",
-    },
-    {
-      language: "ms",
-      name: "Malay",
-    },
-    {
-      language: "ml",
-      name: "Malayalam",
-    },
-    {
-      language: "mt",
-      name: "Maltese",
-    },
-    {
-      language: "mi",
-      name: "Maori",
-    },
-    {
-      language: "mr",
-      name: "Marathi",
-    },
-    {
-      language: "mni-Mtei",
-      name: "Meiteilon (Manipuri)",
-    },
-    {
-      language: "lus",
-      name: "Mizo",
-    },
-    {
-      language: "mn",
-      name: "Mongolian",
-    },
-    {
-      language: "my",
-      name: "Myanmar (Burmese)",
-    },
-    {
-      language: "ne",
-      name: "Nepali",
-    },
-    {
-      language: "nso",
-      name: "Northern Sotho",
-    },
-    {
-      language: "no",
-      name: "Norwegian",
-    },
-    {
-      language: "or",
-      name: "Odia (Oriya)",
-    },
-    {
-      language: "om",
-      name: "Oromo",
-    },
-    {
-      language: "ps",
-      name: "Pashto",
-    },
-    {
-      language: "fa",
-      name: "Persian",
-    },
-    {
-      language: "pl",
-      name: "Polish",
-    },
-    {
-      language: "pt",
-      name: "Portuguese",
-    },
-    {
-      language: "pa",
-      name: "Punjabi",
-    },
-    {
-      language: "qu",
-      name: "Quechua",
-    },
-    {
-      language: "ro",
-      name: "Romanian",
-    },
-    {
-      language: "ru",
-      name: "Russian",
-    },
-    {
-      language: "sm",
-      name: "Samoan",
-    },
-    {
-      language: "sa",
-      name: "Sanskrit",
-    },
-    {
-      language: "gd",
-      name: "Scots Gaelic",
-    },
-    {
-      language: "sr",
-      name: "Serbian",
-    },
-    {
-      language: "st",
-      name: "Sesotho",
-    },
-    {
-      language: "sn",
-      name: "Shona",
-    },
-    {
-      language: "sd",
-      name: "Sindhi",
-    },
-    {
-      language: "si",
-      name: "Sinhala",
-    },
-    {
-      language: "sk",
-      name: "Slovak",
-    },
-    {
-      language: "sl",
-      name: "Slovenian",
-    },
-    {
-      language: "so",
-      name: "Somali",
-    },
-    {
-      language: "es",
-      name: "Spanish",
-    },
-    {
-      language: "su",
-      name: "Sundanese",
-    },
-    {
-      language: "sw",
-      name: "Swahili",
-    },
-    {
-      language: "sv",
-      name: "Swedish",
-    },
-    {
-      language: "tg",
-      name: "Tajik",
-    },
-    {
-      language: "ta",
-      name: "Tamil",
-    },
-    {
-      language: "tt",
-      name: "Tatar",
-    },
-    {
-      language: "te",
-      name: "Telugu",
-    },
-    {
-      language: "th",
-      name: "Thai",
-    },
-    {
-      language: "ti",
-      name: "Tigrinya",
-    },
-    {
-      language: "ts",
-      name: "Tsonga",
-    },
-    {
-      language: "tr",
-      name: "Turkish",
-    },
-    {
-      language: "tk",
-      name: "Turkmen",
-    },
-    {
-      language: "ak",
-      name: "Twi",
-    },
-    {
-      language: "uk",
-      name: "Ukrainian",
-    },
-    {
-      language: "ur",
-      name: "Urdu",
-    },
-    {
-      language: "ug",
-      name: "Uyghur",
-    },
-    {
-      language: "uz",
-      name: "Uzbek",
-    },
-    {
-      language: "vi",
-      name: "Vietnamese",
-    },
-    {
-      language: "cy",
-      name: "Welsh",
-    },
-    {
-      language: "xh",
-      name: "Xhosa",
-    },
-    {
-      language: "yi",
-      name: "Yiddish",
-    },
-    {
-      language: "yo",
-      name: "Yoruba",
-    },
-    {
-      language: "zu",
-      name: "Zulu",
-    },
-    {
-      language: "he",
-      name: "Hebrew",
-    },
-    {
-      language: "jv",
-      name: "Javanese",
-    },
-    {
-      language: "zh-CN",
-      name: "Chinese (Simplified)",
-    },
-  ]);
-=======
   const [languagecode, setLanguageCode] = useState(languages);
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
   const [impCode, setImpCode] = useState("en");
   const [sdl, ssdl] = useState([false, ""]);
   const [dlbe, sdlbe] = useState(false);
@@ -1169,21 +613,11 @@ const Translation = (props) => {
         <MdCancel
           className={cssClasses.cancel}
           fontSize={"2rem"}
-          onClick={() => setIsPopUp(false)}
+          onClick={() => {
+            setIsPopUp(false);
+            props.updateShowing(false);
+          }}
         />
-<<<<<<< HEAD
-        <h1 className="w-full flex justify-start text-white items-center text-left">
-          Prompt:
-        </h1>
-        <h1 className="w-full flex justify-start text-[#fc0001] items-center">
-          {arr[ind].prompt}
-        </h1>
-        <br />
-        <h1 className="w-full flex justify-start text-white items-center text-left">
-          Response:
-        </h1>
-        <h1 className="w-full flex justify-start text-[#fc0001] items-center">
-=======
         <h1 className="w-full flex justify-start text-[#fc0001]  items-center text-left">
           Prompt:
         </h1>
@@ -1195,7 +629,6 @@ const Translation = (props) => {
           Response:
         </h1>
         <h1 className="w-full flex justify-start text-white items-center">
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
           {arr[ind].output}
         </h1>
       </div>
@@ -1316,7 +749,9 @@ const Translation = (props) => {
 
   return (
     <>
-      <div className="w-screen  h-auto grid grid-cols-1 md:grid-cols-4 place-content-center place-items-start p-2 ">
+      <div
+        className={`w-screen ${props.showing ? "h-[100vh] overflow-hidden" : "h-auto"} grid grid-cols-1 md:grid-cols-4 place-content-center place-items-start p-2 `}
+      >
         <div className="w-[99%] p-2 col-span-1 md:col-span-3 grid grid-cols-1 gap-4 place-content-center place-items-center">
           <Title title="TranslateExpert" setShowHistory={setShowHistory} />
           <BigTextarea
@@ -1419,25 +854,14 @@ const Translation = (props) => {
           popupHandler={popupHandler}
           showPopUp={setIsPopUp}
           popup={ispopup}
+          updateShowing={props.updateShowing}
           isHistroyLoading={isHistroyLoading}
         />
       </div>
-<<<<<<< HEAD
-      <History
-        height="95vh"
-        showHistory={showHistory}
-        setShowHistory={setShowHistory}
-        history={history}
-        popupHandler={popupHandler}
-        showPopUp={setIsPopUp}
-        popup={ispopup}
-        isHistroyLoading={isHistroyLoading}
-      />
-    </div>
-=======
-      <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      {!props.showing && (
+        <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      )}{" "}
     </>
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
   );
 };
 

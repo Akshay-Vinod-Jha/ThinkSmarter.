@@ -15,7 +15,7 @@ import { updateData } from "../../common-funtions/updateData.jsx";
 import { MdCancel } from "react-icons/md";
 import Copy from "../../UI/Copy.jsx";
 import Bottom from "../../UI/Bottom.jsx";
-const QA = () => {
+const QA = (props) => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -121,12 +121,15 @@ const QA = () => {
   const popupHandler = (ind, arr) => {
     return (
       <div
-        className={`${classes.popupp} ${arr[ind].type === "text" ? classes.popup : classes.image}`}
+        className={`${classes.popupp} ${arr[ind].type === "text" ? classes.popup : classes.image} `}
       >
         <MdCancel
           className={classes.cancel}
           fontSize={"2rem"}
-          onClick={() => setIsPopUp(false)}
+          onClick={() => {
+            setIsPopUp(false);
+            props.updateShowing(false);
+          }}
         />
         <div className={classes.promptContainer}>
           <div className={classes.heading}>
@@ -161,7 +164,11 @@ const QA = () => {
   };
 
   return (
-    <div className={classes.QA}>
+    <div
+      className={
+        classes.QA + ` ${props.showing ? "h-[60vh] overflow-hidden" : "h-auto"}`
+      }
+    >
       <div className={classes.upper}>
         <InputBox
           setShowHistory={setShowHistory}
@@ -176,16 +183,6 @@ const QA = () => {
           src={src}
           setSrc={setSrc}
         />
-<<<<<<< HEAD
-        {/* <History
-          height="660px"
-          showHistory={showHistory}
-          setShowHistory={setShowHistory}
-          history={Array(5).fill(
-            "The Generated text History from the uploaded image is displayed here."
-          )}
-        /> */}
-=======
         <History
           height="95vh"
           showHistory={showHistory}
@@ -195,8 +192,8 @@ const QA = () => {
           showPopUp={setIsPopUp}
           popup={ispopup}
           isHistroyLoading={isHistroyLoading}
+          updateShowing={props.updateShowing}
         />
->>>>>>> 62e70018569f3375778880805f595cbac29f0cf3
       </div>
       <div className={classes.lower}>
         <Output isLoading={isLoading} output={answer} />
@@ -214,7 +211,9 @@ const QA = () => {
           }}
         />
       </div>
-      <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      {!props.showing && (
+        <Bottom label="Go to All tools" navigateTo=".." userId={userId} />
+      )}
     </div>
   );
 };

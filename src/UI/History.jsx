@@ -18,6 +18,7 @@ const History = ({
   popup,
   showPopUp,
   isHistroyLoading,
+  updateShowing,
 }) => {
   const [current, setCurrent] = useState(-1);
 
@@ -31,6 +32,7 @@ const History = ({
             onClick={() => {
               showPopUp(true);
               setCurrent(ind);
+              updateShowing(true);
             }}
           >
             <p

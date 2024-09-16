@@ -6,7 +6,7 @@ import classes from "./Home.module.css";
 import Reveal from "../../UI/Reveal";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const Home = (props) => {
   const navigate = useNavigate();
   return (
     <div className={classes["home-cantainer"]}>
